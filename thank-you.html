@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You — Questionnaire Submitted</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow:    #FFBE00;
+      --yellow-dim:#C49200;
+      --bg:        #F5F4F0;
+      --surface:   #FFFFFF;
+      --surface-2: #F0EEE9;
+      --border:    #E0DDD6;
+      --border-hi: #C8C5BC;
+      --ink:       #1A1A18;
+      --ink-soft:  #5C5B57;
+      --muted:     #9A9892;
+      --radius-sm: 10px;
+      --radius-lg: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .wrap {
+      max-width: 560px;
+      width: 100%;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 56px 52px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .5s cubic-bezier(.22,.8,.2,1) backwards;
+    }
+    /* Yellow top stripe */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: var(--yellow);
+    }
+    /* Subtle grid */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: .25;
+      pointer-events: none;
+    }
+
+    .card-inner { position: relative; }
+
+    /* ── ICON ── */
+    .success-icon {
+      width: 64px; height: 64px;
+      background: var(--yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 28px;
+      animation: popIn .5s cubic-bezier(.34,1.56,.64,1) .2s both;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.3); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -.025em;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    h1 .sub {
+      display: block;
+      font-size: 0.5em;
+      font-weight: 500;
+      color: var(--yellow-dim);
+      letter-spacing: -.01em;
+      margin-top: 6px;
+    }
+
+    .subtitle {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 38ch;
+    }
+
+    /* ── META ROW ── */
+    .meta {
+      display: flex;
+      gap: 0;
+      margin: 28px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .meta-item {
+      flex: 1;
+      padding: 14px 18px;
+      border-right: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ── ACTIONS ── */
+    .actions { display: flex; gap: 10px; }
+
+    .btn {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: transform .14s, opacity .14s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn:hover { transform: translateY(-1px); opacity: .88; }
+    .btn-primary { background: var(--yellow); color: var(--ink); }
+    .btn-ghost {
+      background: var(--surface-2);
+      color: var(--ink-soft);
+      border: 1px solid var(--border-hi);
+    }
+
+    /* ── FOOTER NOTE ── */
+    .note {
+      margin-top: 24px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 40px 24px 36px; }
+      .meta { flex-direction: column; }
+      .meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .meta-item:last-child { border-bottom: none; }
+      .actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="card-inner">
+        <div class="success-icon">✓</div>
+
+        <h1>
+          Thank you!
+          <span class="sub">Your questionnaire is on its way.</span>
+        </h1>
+
+        <p class="subtitle">
+          We've received your answers and will review them carefully. Expect to hear from us soon.
+        </p>
+
+        <div class="meta">
+          <div class="meta-item">
+            <div class="meta-label">Submitted</div>
+            <div class="meta-value" id="submitTime">—</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Status</div>
+            <div class="meta-value" style="color: var(--yellow-dim)">Received ✓</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="/" class="btn btn-primary">← Submit another response</a>
+        </div>
+
+        <p class="note">
+          Check your inbox — we may follow up with a few clarifying questions before we start.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const now = new Date();
+    document.getElementById('submitTime').textContent = now.toLocaleString('en-GB', {
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  </script>
+</body>
+</html>
